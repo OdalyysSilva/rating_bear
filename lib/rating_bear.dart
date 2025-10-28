@@ -9,6 +9,7 @@ class RatingBear extends StatefulWidget {
   State<RatingBear> createState() => _RatingBearState();
 }
 
+
 class _RatingBearState extends State<RatingBear> {
   int selectedStars = 0;
   StateMachineController? controller;
