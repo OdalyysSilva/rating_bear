@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart'; //importa los widgets y estilos de flutter
 //Para las animaciones de rive
 import 'package:rive/rive.dart';
+import 'dart:async';
 
 class RatingBear extends StatefulWidget {
   const RatingBear({super.key});
@@ -16,7 +17,8 @@ class _RatingBearState extends State<RatingBear> {
   SMITrigger? trigSuccess; // para felicidad
   SMIBool? isCheking; // para neutral
   SMINumber? numLook; // controla la dirección de los ojos
-
+  Artboard? _artboard; //Guarda al oso
+  Timer? _resetTimer; //Para reiniciar las animaciones
   bool _isAnimating = false; // para reaccion rápida
 
   @override
@@ -27,6 +29,7 @@ class _RatingBearState extends State<RatingBear> {
 
   // Carga el archivo Rive y obtiene los controles
   void _onRiveInit(Artboard artboard) {
+    _artboard = artboard;
     controller = StateMachineController.fromArtboard(
       artboard,
       'Login Machine',
@@ -46,6 +49,8 @@ class _RatingBearState extends State<RatingBear> {
     if (_isAnimating) return; // evita disparos dobles
     _isAnimating = true;
 
+    _resetTimer?.cancel(); //Cancela la animación
+
     // Aplica la emoción según la calificación
     if (selectedStars <= 2) {
       trigFail?.fire(); //Dispara cuando ve que son 1 o 2 estrellas
@@ -60,6 +65,26 @@ class _RatingBearState extends State<RatingBear> {
     // Espera un instante corto antes de permitir otra animación
     await Future.delayed(const Duration(milliseconds: 200));
     _isAnimating = false;
+
+    // Reinicia el estado del oso después de 800 ms (puedes ajustar)
+    _resetTimer = Timer(const Duration(milliseconds: 800), () {
+      if (_artboard != null) {
+        final newController = StateMachineController.fromArtboard(
+          _artboard!,
+          'Login Machine',
+        );
+        if (newController != null) {
+          _artboard!
+            ..removeController(controller!)
+            ..addController(newController);
+          controller = newController;
+          trigFail = controller!.findSMI('trigFail');
+          trigSuccess = controller!.findSMI('trigSuccess');
+          isCheking = controller!.findSMI('isCheking');
+          numLook = controller!.findSMI('numLook');
+        }
+      }
+    });
   }
 
   @override
