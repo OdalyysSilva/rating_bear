@@ -1,16 +1,25 @@
-# rating_bear
+🌟 Rating Bear App
+# 🌟 Rating Bear App
 
-A new Flutter project.
+A small **Flutter** app featuring an adorable bear animated with **Rive**.  
+The bear reacts based on the number of stars you select, a fun way to explore interactive animations and state control.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🧸 Features
+- Smooth **happy**, **neutral**, and **sad** bear animations.  
+- Instant reaction when selecting stars.  
+- Clean and minimalist interface.  
+- Well-commented code for easy learning.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## ⚙️ Technologies
+- **Flutter** 🐦  
+- **Rive** 🎨  
+- **Dart**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## Autor
+- Odalys Silva
